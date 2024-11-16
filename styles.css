@@ -45,10 +45,42 @@ h1 {
 }
 
 .game-controls {
+    margin: 2rem auto;
+    max-width: 800px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.difficulty-selector,
+.instrument-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.difficulty-selector select,
+.instrument-selector select {
+    padding: 0.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.difficulty-selector select:hover,
+.instrument-selector select:hover {
+    border-color: var(--secondary-color);
 }
 
 select {
@@ -98,45 +130,68 @@ select {
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
-.piano-keyboard {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    margin-bottom: 2rem;
-    position: relative;
-    height: 200px;
+.note-buttons {
+    margin: 2rem auto;
+    max-width: 600px;
 }
 
-.key {
-    position: relative;
-    cursor: pointer;
-    transition: all 0.1s;
+.octave-select {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.white-key {
-    width: 60px;
-    height: 200px;
+.octave-select select {
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.note-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.note-btn {
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
     background: white;
-    border: 2px solid #ddd;
-    border-radius: 0 0 8px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.black-key {
-    width: 40px;
-    height: 120px;
-    background: #333;
-    position: absolute;
-    border-radius: 0 0 4px 4px;
-    z-index: 1;
+.note-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
-.key:hover {
-    background: #f0f0f0;
-}
-
-.key.active {
+.note-btn.active {
     background: var(--primary-color);
-    transform: translateY(2px);
+    color: white;
+}
+
+.note-btn.accidental {
+    grid-column: span 2;
+    background: #f8f9fa;
+    border-color: var(--secondary-color);
+    margin-top: 0.5rem;
+}
+
+.note-btn.correct {
+    background: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+
+.note-btn.incorrect {
+    background: var(--error-color);
+    color: white;
+    border-color: var(--error-color);
 }
 
 .feedback {
@@ -172,22 +227,44 @@ select {
 }
 
 .stats {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
 }
 
 .progress-charts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     margin-top: 1rem;
 }
 
-.accuracy-chart, .reaction-chart {
-    text-align: center;
+.stat-item {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.accuracy-bar {
+    height: 24px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: width 0.3s ease;
+    min-width: 40px;
 }
 
 .tips {
@@ -219,17 +296,16 @@ select {
         grid-template-columns: 1fr;
     }
 
-    .piano-keyboard {
-        height: 150px;
+    .note-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
-
-    .white-key {
-        width: 40px;
-        height: 150px;
+    
+    .note-btn {
+        padding: 0.8rem;
+        font-size: 1rem;
     }
-
-    .black-key {
-        width: 30px;
-        height: 90px;
+    
+    .note-btn.accidental {
+        grid-column: span 2;
     }
 }
