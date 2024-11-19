@@ -6,6 +6,7 @@ class PitchPerfect {
         this.streak = 0;
         this.hintsRemaining = 3;
         this.startTime = null;
+        this.hasGuessedWrong = false;
         this.progressStats = {
             totalAttempts: 0,
             correctAttempts: 0,
@@ -150,6 +151,7 @@ class PitchPerfect {
         
         this.startTime = Date.now();
         this.hintsRemaining = 3;
+        this.hasGuessedWrong = false;
         this.hintText.textContent = '';
         this.feedbackDisplay.textContent = 'Listen and guess the note!';
         
@@ -161,6 +163,11 @@ class PitchPerfect {
     checkNote(guessedNote) {
         if (!this.currentNote) {
             this.feedbackDisplay.textContent = 'Click "Play Note" to start!';
+            return;
+        }
+
+        if (this.hasGuessedWrong) {
+            this.feedbackDisplay.textContent = 'Already guessed wrong! Play a new note to continue.';
             return;
         }
 
@@ -199,6 +206,7 @@ class PitchPerfect {
             this.feedbackDisplay.textContent = `Correct! +${points} points (${timeBonus} time bonus)`;
         } else {
             this.streak = 0;
+            this.hasGuessedWrong = true;
             button.classList.add('incorrect');
             
             // Track common mistakes
